@@ -1,0 +1,43 @@
+# Node.js and npm
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# TypeScript
+*.tsbuildinfo
+*.js.map
+
+# Environment variables
+.env
+*.env
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Build output
+dist/
+
+# IDE and editor files
+.vscode/
+
+# Test configuration files
+jest.config.js
+
+# Git submodules
+.gitmodules
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Miscellaneous
+.cache

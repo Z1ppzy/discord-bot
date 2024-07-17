@@ -52,7 +52,7 @@ MC_SERVER_IP=your_minecraft_server_ip
 ### 4. Build the bot
 
 ```
-tsc
+npm run build
 ```
 
 ### 5. Run the bot
@@ -60,7 +60,7 @@ tsc
 Start the bot using Node.js:
 
 ```
-node dist/index.js
+npm start
 ```
 
 # File Structure

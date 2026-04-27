@@ -3,11 +3,19 @@ import { config } from 'dotenv';
 
 config();
 
+function validateEnv(): { token: string; serverIp: string } {
+  const token = process.env.DISCORD_BOT_TOKEN;
+  const serverIp = process.env.MC_SERVER_IP;
+  if (!token) throw new Error('DISCORD_BOT_TOKEN is not set in .env');
+  if (!serverIp) throw new Error('MC_SERVER_IP is not set in .env');
+  return { token, serverIp };
+}
+
+const { token, serverIp } = validateEnv();
+
 const client = new Client({
   intents: [GatewayIntentBits.Guilds]
 });
-
-const mcServerIp = process.env.MC_SERVER_IP || '';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`);
@@ -17,7 +25,7 @@ client.on('ready', () => {
 
 async function updateStatus() {
   try {
-    const response = await fetch(`https://api.mcstatus.io/v2/status/java/${mcServerIp}`);
+    const response = await fetch(`https://api.mcstatus.io/v2/status/java/${serverIp}`);
     if (!response.ok) return;
     const data = await response.json() as { players: { online: number } };
     await client.user?.setPresence({
@@ -32,4 +40,4 @@ async function updateStatus() {
   }
 }
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login(token);

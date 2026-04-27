@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 config();
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
+  intents: [GatewayIntentBits.Guilds]
 });
 
 const mcServerIp = process.env.MC_SERVER_IP || '';

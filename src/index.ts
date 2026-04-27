@@ -1,5 +1,4 @@
 import { Client, GatewayIntentBits, ActivityType } from 'discord.js';
-import axios from 'axios';
 import { config } from 'dotenv';
 
 config();
@@ -18,17 +17,16 @@ client.on('ready', () => {
 
 async function updateStatus() {
   try {
-    const response = await axios.get(`https://api.mcstatus.io/v2/status/java/${mcServerIp}`);
-    if (response.status === 200) {
-      const playersOnline = response.data.players.online;
-      await client.user?.setPresence({
-        status: 'online',
-        activities: [{
-          name: `Игроков онлайн: ${playersOnline}`,
-          type: ActivityType.Watching
-        }]
-      });
-    }
+    const response = await fetch(`https://api.mcstatus.io/v2/status/java/${mcServerIp}`);
+    if (!response.ok) return;
+    const data = await response.json() as { players: { online: number } };
+    await client.user?.setPresence({
+      status: 'online',
+      activities: [{
+        name: `Игроков онлайн: ${data.players.online}`,
+        type: ActivityType.Watching
+      }]
+    });
   } catch (error) {
     console.error('Error updating status:', error);
   }

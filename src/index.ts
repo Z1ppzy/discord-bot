@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits, ActivityType } from 'discord.js';
 import { config } from 'dotenv';
+import { fetchPlayerCount } from './minecraft';
 
 config();
 
@@ -25,13 +26,6 @@ client.on('ready', () => {
   updateStatus();
   statusInterval = setInterval(updateStatus, 300000);
 });
-
-export async function fetchPlayerCount(ip: string): Promise<number | null> {
-  const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
-  if (!response.ok) return null;
-  const data = await response.json() as { players: { online: number } };
-  return data.players.online;
-}
 
 async function updateStatus() {
   try {

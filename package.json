@@ -17,5 +17,6 @@
     "vitest": "^4.1.5"
   },
   "author": "Z1ppzy",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@10.30.1"
 }

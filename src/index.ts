@@ -23,7 +23,7 @@ const client = new Client({
 
 let statusInterval: ReturnType<typeof setInterval> | null = null;
 
-client.on('ready', async () => {
+client.on('clientReady', async () => {
   console.log(`Logged in as ${client.user?.tag}`);
 
   const rest = new REST().setToken(token);
